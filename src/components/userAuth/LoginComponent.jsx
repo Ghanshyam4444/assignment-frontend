@@ -10,11 +10,14 @@ const LoginComponent = () => {
   const loginUser = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API}/api/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userDetail),
-      });
+      const response = await fetch(
+        `https://vercel.com/ghanshyams-projects-d2cc8797/assignment-backend/api/auth/login`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userDetail),
+        }
+      );
       const userInfo = await response.json();
       if (response.ok) {
         alert("Login successful");

@@ -122,14 +122,17 @@ const QuestionPaper = () => {
     event.preventDefault();
     const id = params.id;
     try {
-      const response = await fetch(`${API}/api/User/submitResponses1`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: authorization_token,
-        },
-        body: JSON.stringify({ responses, id }),
-      });
+      const response = await fetch(
+        `https://assignment-backend-eight-self.vercel.app/api/User/submitResponses1`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: authorization_token,
+          },
+          body: JSON.stringify({ responses, id }),
+        }
+      );
       if (!response.ok) {
         console.error("Error submitting responses");
         return;

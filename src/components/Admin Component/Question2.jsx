@@ -4,7 +4,7 @@ import { useAuth } from "../../store/auth";
 
 const Question2 = () => {
   const [questions, setQuestions] = useState([]);
-  const { submitted, setSubmitted, authorization_token, newQuestionId } =
+  const { submitted, setSubmitted, authorization_token, newQuestionId, API } =
     useAuth();
   const [newQuestion, setNewQuestion] = useState({
     answers: [],
@@ -87,17 +87,14 @@ const Question2 = () => {
   // Submits question details to the API
   const submitDetails = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8000/api/admin/createQuestion2`,
-        {
-          method: "PATCH",
-          headers: {
-            Authorization: authorization_token,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ questions, newQuestionId }),
-        }
-      );
+      const response = await fetch(`${API}/api/admin/createQuestion2`, {
+        method: "PATCH",
+        headers: {
+          Authorization: authorization_token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ questions, newQuestionId }),
+      });
 
       if (!response.ok) throw new Error("Failed to submit details");
 

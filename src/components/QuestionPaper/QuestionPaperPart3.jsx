@@ -10,6 +10,7 @@ const QuestionPaperPart3 = () => {
     authorization_token,
     newAnswerId,
     setNewAnswerId,
+    API,
   } = useAuth();
   const params = useParams();
   const [questions, setQuestions] = useState([]);
@@ -20,7 +21,7 @@ const QuestionPaperPart3 = () => {
     const id = params.id;
     try {
       const response = await fetch(
-        `http://localhost:8000/api/User/findQuestionDetails/${id}`,
+        `${API}/api/User/findQuestionDetails/${id}`,
         {
           method: "GET",
           headers: {
@@ -56,17 +57,14 @@ const QuestionPaperPart3 = () => {
   // Handle form submission
   const handleSubmit = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8000/api/User/submitResponses3`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: authorization_token,
-          },
-          body: JSON.stringify({ responses, newAnswerId }),
-        }
-      );
+      const response = await fetch(`${API}/api/User/submitResponses3`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: authorization_token,
+        },
+        body: JSON.stringify({ responses, newAnswerId }),
+      });
       if (!response.ok) {
         console.error("Error submitting responses");
         return;

@@ -4,13 +4,13 @@ import { useNavigate } from "react-router-dom";
 
 const LoginComponent = () => {
   const [userDetail, setUserDetail] = useState({ email: "", password: "" });
-  const { storeTokenInLS } = useAuth();
+  const { storeTokenInLS, API } = useAuth();
   const navigate = useNavigate();
 
   const loginUser = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:8000/api/auth/login`, {
+      const response = await fetch(`${API}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userDetail),

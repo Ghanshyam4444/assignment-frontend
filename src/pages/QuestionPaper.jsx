@@ -13,6 +13,7 @@ const QuestionPaper = () => {
     authorization_token,
     newAnswerId,
     setNewAnswerId,
+    API,
   } = useAuth();
   const params = useParams();
   const [questions, setQuestions] = useState({ question1: [] });
@@ -37,7 +38,7 @@ const QuestionPaper = () => {
     const id = params.id;
     try {
       const response = await fetch(
-        `http://localhost:8000/api/User/findQuestionDetails/${id}`,
+        `${API}/api/User/findQuestionDetails/${id}`,
         {
           method: "GET",
           headers: {
@@ -121,17 +122,14 @@ const QuestionPaper = () => {
     event.preventDefault();
     const id = params.id;
     try {
-      const response = await fetch(
-        `http://localhost:8000/api/User/submitResponses1`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: authorization_token,
-          },
-          body: JSON.stringify({ responses, id }),
-        }
-      );
+      const response = await fetch(`${API}/api/User/submitResponses1`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: authorization_token,
+        },
+        body: JSON.stringify({ responses, id }),
+      });
       if (!response.ok) {
         console.error("Error submitting responses");
         return;

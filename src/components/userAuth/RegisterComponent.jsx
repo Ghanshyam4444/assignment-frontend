@@ -10,7 +10,7 @@ const RegisterComponent = () => {
     confirmPassword: "",
     phone: "",
   });
-  const { storeTokenInLS } = useAuth();
+  const { storeTokenInLS, API } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -24,14 +24,11 @@ const RegisterComponent = () => {
       alert("Passwords do not match");
     } else {
       try {
-        const response = await fetch(
-          `http://localhost:8000/api/auth/register`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(userDetail),
-          }
-        );
+        const response = await fetch(`${API}/api/auth/register`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userDetail),
+        });
 
         const userInfo = await response.json();
         if (response.ok) {

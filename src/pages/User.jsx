@@ -3,21 +3,18 @@ import { useAuth } from "../store/auth";
 import { useNavigate } from "react-router-dom";
 
 const User = () => {
-  const { authorization_token } = useAuth();
+  const { authorization_token, API } = useAuth();
   const [questions, setQuestions] = useState([]);
   const navigate = useNavigate();
 
   const totalQuestions = async () => {
     try {
-      const response = await fetch(
-        "http://localhost:8000/api/User/getAllQuestions",
-        {
-          method: "GET",
-          headers: {
-            Authorization: authorization_token,
-          },
-        }
-      );
+      const response = await fetch(`${API}/api/User/getAllQuestions`, {
+        method: "GET",
+        headers: {
+          Authorization: authorization_token,
+        },
+      });
       if (!response.ok) {
         console.log("Error fetching questions");
         return;

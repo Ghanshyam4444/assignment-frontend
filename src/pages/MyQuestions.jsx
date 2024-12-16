@@ -5,20 +5,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const MyQuestions = () => {
   const [questions, setQuestions] = useState([]);
-  const { authorization_token } = useAuth();
+  const { authorization_token, API } = useAuth();
   const navigate = useNavigate();
 
   const fetchQuestions = async () => {
     try {
-      const response = await fetch(
-        "http://localhost:8000/api/MyQuestions/findMyQuestions",
-        {
-          method: "GET",
-          headers: {
-            Authorization: authorization_token,
-          },
-        }
-      );
+      const response = await fetch(`${API}/api/MyQuestions/findMyQuestions`, {
+        method: "GET",
+        headers: {
+          Authorization: authorization_token,
+        },
+      });
       if (!response.ok) {
         throw new Error("Failed to fetch questions");
       }

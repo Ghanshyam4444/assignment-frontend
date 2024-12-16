@@ -4,7 +4,7 @@ import { useAuth } from "../store/auth";
 
 const ViewSubmissions = () => {
   const [submissions, setSubmissions] = useState([]);
-  const { authorization_token } = useAuth();
+  const { authorization_token, API } = useAuth();
   const params = useParams();
   const navigate = useNavigate();
 
@@ -12,7 +12,7 @@ const ViewSubmissions = () => {
     const id = params.questionId;
     try {
       const response = await fetch(
-        `http://localhost:8000/api/MyQuestions/findSubmissions/${id}`,
+        `${API}/api/MyQuestions/findSubmissions/${id}`,
         {
           method: "GET",
           headers: { Authorization: authorization_token },

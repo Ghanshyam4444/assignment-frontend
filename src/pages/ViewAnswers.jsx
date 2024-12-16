@@ -6,7 +6,7 @@ import { useAuth } from "../store/auth";
 import "./ViewAnswer.css";
 
 const ViewAnswers = () => {
-  const { authorization_token } = useAuth();
+  const { authorization_token, API } = useAuth();
   const params = useParams();
   const [answerData, setAnswerData] = useState(null);
 
@@ -15,7 +15,7 @@ const ViewAnswers = () => {
     const id = params.answerId;
     try {
       const response = await fetch(
-        `http://localhost:8000/api/MyQuestions/findAnswerSheet/${id}`,
+        `${API}/api/MyQuestions/findAnswerSheet/${id}`,
         {
           method: "GET",
           headers: { Authorization: authorization_token },
@@ -156,7 +156,7 @@ export default ViewAnswers;
 // import "./ViewAnswer.css";
 
 // const ViewAnswers = () => {
-//   const { authorization_token } = useAuth();
+//   const { authorization_token,API } = useAuth();
 //   const params = useParams();
 //   const [answerData, setAnswerData] = useState(null);
 //   const [answer, setAnswer] = useState(null);
@@ -166,7 +166,7 @@ export default ViewAnswers;
 //     const id = params.answerId;
 //     try {
 //       const response = await fetch(
-//         `http://localhost:8000/api/MyQuestions/findAnswerSheet/${id}`,
+//         `${API}/api/MyQuestions/findAnswerSheet/${id}`,
 //         {
 //           method: "GET",
 //           headers: { Authorization: authorization_token },

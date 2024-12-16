@@ -4,7 +4,7 @@ import { useAuth } from "../store/auth";
 import "./ViewAnswer.css";
 
 const ViewCorrectAnswers = () => {
-  const { authorization_token } = useAuth();
+  const { authorization_token, API } = useAuth();
   const params = useParams();
   const [answerData, setAnswerData] = useState(null);
 
@@ -12,7 +12,7 @@ const ViewCorrectAnswers = () => {
     const id = params.questionId;
     try {
       const response = await fetch(
-        `http://localhost:8000/api/User/findQuestionDetails/${id}`,
+        `${API}/api/User/findQuestionDetails/${id}`,
         {
           method: "GET",
           headers: { Authorization: authorization_token },

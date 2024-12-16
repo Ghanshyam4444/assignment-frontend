@@ -17,6 +17,7 @@ const Question1 = () => {
     authorization_token,
     setNewQuestionId,
     newQuestionId,
+    API,
   } = useAuth();
 
   const handleAddQuestion = () => {
@@ -62,17 +63,14 @@ const Question1 = () => {
 
   const submitDetails = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8000/api/admin/createQuestion1`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: authorization_token,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(questions),
-        }
-      );
+      const response = await fetch(`${API}/api/admin/createQuestion1`, {
+        method: "POST",
+        headers: {
+          Authorization: authorization_token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(questions),
+      });
       if (!response.ok) {
         console.log("Error occurred during submission");
       }

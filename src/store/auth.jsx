@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
   const userAuthentication = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/api/auth/userDetails",
+        "https://assignment-backend-eight-self.vercel.app/api/auth/userDetails",
         {
           method: "GET",
           headers: {

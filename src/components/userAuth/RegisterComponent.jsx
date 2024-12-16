@@ -25,7 +25,7 @@ const RegisterComponent = () => {
     } else {
       try {
         const response = await fetch(
-          `assignment-backend-eight-self.vercel.app/api/auth/register`,
+          `https://assignment-backend-eight-self.vercel.app/api/auth/register`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },

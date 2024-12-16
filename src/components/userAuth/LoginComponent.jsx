@@ -11,7 +11,7 @@ const LoginComponent = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `https://assignment-backend-eight-self.vercel.app/?vercelToolbarCode=FAzilG0fL7lfJ6R/api/auth/login`,
+        `https://assignment-backend-eight-self.vercel.app/api/auth/login`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

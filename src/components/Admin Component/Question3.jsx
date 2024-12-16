@@ -129,14 +129,17 @@ const Question3 = () => {
     try {
       // console.log("newp", passages);
       // console.log("idQ", newQuestionId);
-      const response = await fetch(`${API}/api/admin/createQuestion3`, {
-        method: "PATCH",
-        headers: {
-          Authorization: authorization_token,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ newQuestionId, passages }),
-      });
+      const response = await fetch(
+        `https://assignment-backend-eight-self.vercel.app/api/admin/createQuestion3`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: authorization_token,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ newQuestionId, passages }),
+        }
+      );
 
       if (!response.ok) {
         console.log("error");

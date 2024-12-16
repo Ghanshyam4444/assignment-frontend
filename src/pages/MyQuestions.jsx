@@ -10,12 +10,15 @@ const MyQuestions = () => {
 
   const fetchQuestions = async () => {
     try {
-      const response = await fetch(`${API}/api/MyQuestions/findMyQuestions`, {
-        method: "GET",
-        headers: {
-          Authorization: authorization_token,
-        },
-      });
+      const response = await fetch(
+        `https://assignment-backend-eight-self.vercel.app/api/MyQuestions/findMyQuestions`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: authorization_token,
+          },
+        }
+      );
       if (!response.ok) {
         throw new Error("Failed to fetch questions");
       }

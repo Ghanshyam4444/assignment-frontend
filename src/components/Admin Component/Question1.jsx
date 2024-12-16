@@ -63,14 +63,17 @@ const Question1 = () => {
 
   const submitDetails = async () => {
     try {
-      const response = await fetch(`${API}/api/admin/createQuestion1`, {
-        method: "POST",
-        headers: {
-          Authorization: authorization_token,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(questions),
-      });
+      const response = await fetch(
+        `https://assignment-backend-eight-self.vercel.app/api/admin/createQuestion1`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: authorization_token,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(questions),
+        }
+      );
       if (!response.ok) {
         console.log("Error occurred during submission");
       }

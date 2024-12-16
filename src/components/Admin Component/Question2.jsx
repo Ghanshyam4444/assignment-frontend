@@ -87,14 +87,17 @@ const Question2 = () => {
   // Submits question details to the API
   const submitDetails = async () => {
     try {
-      const response = await fetch(`${API}/api/admin/createQuestion2`, {
-        method: "PATCH",
-        headers: {
-          Authorization: authorization_token,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ questions, newQuestionId }),
-      });
+      const response = await fetch(
+        `https://assignment-backend-eight-self.vercel.app/api/admin/createQuestion2`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: authorization_token,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ questions, newQuestionId }),
+        }
+      );
 
       if (!response.ok) throw new Error("Failed to submit details");
 

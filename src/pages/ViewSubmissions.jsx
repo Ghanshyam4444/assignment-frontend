@@ -12,7 +12,7 @@ const ViewSubmissions = () => {
     const id = params.questionId;
     try {
       const response = await fetch(
-        `${API}/api/MyQuestions/findSubmissions/${id}`,
+        `https://assignment-backend-eight-self.vercel.app/api/MyQuestions/findSubmissions/${id}`,
         {
           method: "GET",
           headers: { Authorization: authorization_token },

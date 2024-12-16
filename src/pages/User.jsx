@@ -9,12 +9,15 @@ const User = () => {
 
   const totalQuestions = async () => {
     try {
-      const response = await fetch(`${API}/api/User/getAllQuestions`, {
-        method: "GET",
-        headers: {
-          Authorization: authorization_token,
-        },
-      });
+      const response = await fetch(
+        `https://assignment-backend-eight-self.vercel.app/api/User/getAllQuestions`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: authorization_token,
+          },
+        }
+      );
       if (!response.ok) {
         console.log("Error fetching questions");
         return;

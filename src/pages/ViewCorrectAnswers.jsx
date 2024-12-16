@@ -12,7 +12,7 @@ const ViewCorrectAnswers = () => {
     const id = params.questionId;
     try {
       const response = await fetch(
-        `${API}/api/User/findQuestionDetails/${id}`,
+        `https://assignment-backend-eight-self.vercel.app/api/User/findQuestionDetails/${id}`,
         {
           method: "GET",
           headers: { Authorization: authorization_token },

@@ -15,7 +15,7 @@ const ViewAnswers = () => {
     const id = params.answerId;
     try {
       const response = await fetch(
-        `${API}/api/MyQuestions/findAnswerSheet/${id}`,
+        `https://assignment-backend-eight-self.vercel.app/api/MyQuestions/findAnswerSheet/${id}`,
         {
           method: "GET",
           headers: { Authorization: authorization_token },
@@ -166,7 +166,7 @@ export default ViewAnswers;
 //     const id = params.answerId;
 //     try {
 //       const response = await fetch(
-//         `${API}/api/MyQuestions/findAnswerSheet/${id}`,
+//         `https://assignment-backend-eight-self.vercel.app/api/MyQuestions/findAnswerSheet/${id}`,
 //         {
 //           method: "GET",
 //           headers: { Authorization: authorization_token },

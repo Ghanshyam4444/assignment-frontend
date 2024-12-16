@@ -1,0 +1,54 @@
+.answer-item:active {
+    cursor: grabbing;
+    background-color: #f0f0f0;
+}
+
+/* Add this to your custom CSS to change the color of the available answers */
+.answer-item {
+  background-color: #007bff; 
+  color: white; 
+  cursor: grab;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+}
+
+.answer-item:hover {
+  background-color: #0056b3; 
+}
+
+
+.question-paper-header {
+    margin-bottom: 2rem;
+}
+
+.answer-pool h4 {
+    margin-bottom: 1.5rem;
+}
+.custom-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+
+
+.droppable-box {
+    border: 2px dashed #ccc;
+    padding: 15px;
+    min-height: 50px;
+    transition: all 0.3s ease;
+}
+
+.droppable-box-hover {
+    border-color: #4CAF50;
+    background-color: rgba(76, 175, 80, 0.1);
+    cursor: pointer;
+}
+
+.droppable-box.filled {
+    border: 2px solid #4CAF50;
+    background-color: rgba(76, 175, 80, 0.1);
+    cursor: pointer;
+}

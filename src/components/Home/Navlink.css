@@ -1,0 +1,48 @@
+
+.header-container {
+    align-items: center;
+    background-color: black;
+    border: 1px solid white;
+    font-family: Poppins;
+}
+
+.all_pages {
+    padding: 5px;
+    height: 4rem;
+    align-items: center;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.left_pages {
+    margin-left: 20px;
+    display: flex;
+    padding-left: 10px;
+}
+
+.right_pages {
+    margin-right: 20px;
+    display: flex;
+}
+
+.header-container ul {
+    list-style-type: none;
+}
+
+.header-container li {
+    margin: 1rem;
+}
+
+.navitems {
+    text-decoration: none;
+    color: white;
+}
+
+.navitems:hover {
+    color: aqua !important;
+}
+
+.navitems.active {
+    color: darkcyan !important;
+}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import RegisterComponent from "../components/userAuth/RegisterComponent";
-import LoginComponent from "../components/userAuth/loginComponent";
+import LoginComponent from "../components/userAuth/LoginComponent";
 
 const UserAuthentication = () => {
   const [tabValue, setTabValue] = useState(0);

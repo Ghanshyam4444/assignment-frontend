@@ -50,18 +50,8 @@ const ViewSubmissions = () => {
   return (
     <div className="container mt-5">
       {isLoading ? (
-        <div
-          className="d-flex justify-content-center align-items-center"
-          style={{ height: "50vh" }}
-        >
-          <div>
-            <div className="spinner-border text-primary" role="status">
-              <span className="sr-only">Loading...</span>
-            </div>
-            <p className="mt-3 text-center">
-              Loading submissions, please wait...
-            </p>
-          </div>
+        <div className="question-paper-header text-center mb-5 mt-4">
+          <h3 className="text-muted">Loading ...</h3>
         </div>
       ) : (
         <>

@@ -21,6 +21,7 @@ const QuestionPaper = () => {
   const [responses, setResponses] = useState({});
   const [draggingItem, setDraggingItem] = useState(null);
   const [draggingOver, setDraggingOver] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const shuffleArray = (array) => {
     const shuffledArray = [...array];
@@ -35,6 +36,7 @@ const QuestionPaper = () => {
   };
 
   const findQuestionDetails = async () => {
+    setIsLoading(true);
     const id = params.id;
     try {
       const response = await fetch(
@@ -59,6 +61,8 @@ const QuestionPaper = () => {
       setShuffledAnswers(shuffled);
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -168,112 +172,132 @@ const QuestionPaper = () => {
 
   return (
     <>
-      <div className="question-paper-header text-center mb-5">
-        <h1 className="question-paper-title">Question Paper</h1>
-      </div>
-      {questions.question1.length > 0 ? (
-        <>
-          <div className="card bg-white shadow-sm container mt-4">
-            {/* Question1 */}
-            <div className="question-paper-header text-center mb-5 mt-4">
-              <h3 className="text-muted">Drag the answers into the boxes</h3>
+      {isLoading ? (
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{ height: "100vh" }}
+        >
+          <div>
+            <div className="spinner-border text-primary" role="status">
+              <span className="sr-only">Loading...</span>
             </div>
-            {/* Answer Pool */}
-            <div className="answer-pool mb-4">
-              {questions.question1.map((question, qIndex) => (
-                <div key={qIndex} className="mb-4">
-                  <h5>Question {qIndex + 1}</h5>
-                  <div className="d-flex align-items-start">
-                    {shuffledAnswers[qIndex]?.map((item, index) => (
-                      <div
-                        key={index}
-                        className="answer-item p-2 border rounded me-2 mb-2"
-                        draggable
-                        onDragStart={() => handleDragStart(item)}
-                      >
-                        {item.text}
-                      </div>
-                    ))}
-                  </div>
-                  <div className="d-flex flex-column align-items-start">
-                    {/* available question part */}
-                    {question.items.map((item, index) => (
-                      <div
-                        key={index}
-                        className="d-flex align-items-center mb-3"
-                      >
-                        {/* BelongsTo Text */}
-                        <div className="belongs-to p-2 me-3">
-                          <strong>{item.belongsTo}</strong>
-                        </div>
-
-                        {/* Droppable Box */}
-                        <div
-                          className={`droppable-box p-2 border rounded me-3 ${
-                            draggingOver === item.belongsTo
-                              ? "droppable-box-hover"
-                              : ""
-                          } ${
-                            responses[`${qIndex}-${item.belongsTo}`]
-                              ? "filled"
-                              : ""
-                          }`}
-                          onDragOver={(e) => handleDragOver(e, item.belongsTo)}
-                          onDragLeave={handleDragLeave}
-                          onDrop={() => handleDrop(qIndex, item.belongsTo)}
-                        >
-                          {responses[`${qIndex}-${item.belongsTo}`] ? (
-                            <div
-                              className="d-flex justify-content-between"
-                              draggable
-                              onDragStart={() =>
-                                handleReturnDrag(qIndex, {
-                                  text: responses[
-                                    `${qIndex}-${item.belongsTo}`
-                                  ],
-                                })
-                              }
-                            >
-                              {responses[`${qIndex}-${item.belongsTo}`]}
-                            </div>
-                          ) : (
-                            "Drop your answer here"
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
+            <p className="mt-3 text-center">Loading, please wait...</p>
           </div>
-        </>
+        </div>
       ) : (
         <>
-          <div className="container my-4">
-            <div className="card shadow p-4">
-              <div className="text-center">
-                <div className="p-font text-muted">
-                  <h5>No questions related to matching question answers</h5>
+          <div className="question-paper-header text-center mb-5">
+            <h1 className="question-paper-title">Question Paper</h1>
+          </div>
+          {questions.question1.length > 0 ? (
+            <>
+              <div className="card bg-white shadow-sm container mt-4">
+                {/* Question1 */}
+                <div className="question-paper-header text-center mb-5 mt-4">
+                  <h3 className="text-muted">
+                    Drag the answers into the boxes
+                  </h3>
+                </div>
+                {/* Answer Pool */}
+                <div className="answer-pool mb-4">
+                  {questions.question1.map((question, qIndex) => (
+                    <div key={qIndex} className="mb-4">
+                      <h5>Question {qIndex + 1}</h5>
+                      <div className="d-flex align-items-start">
+                        {shuffledAnswers[qIndex]?.map((item, index) => (
+                          <div
+                            key={index}
+                            className="answer-item p-2 border rounded me-2 mb-2"
+                            draggable
+                            onDragStart={() => handleDragStart(item)}
+                          >
+                            {item.text}
+                          </div>
+                        ))}
+                      </div>
+                      <div className="d-flex flex-column align-items-start">
+                        {/* Available Question Part */}
+                        {question.items.map((item, index) => (
+                          <div
+                            key={index}
+                            className="d-flex align-items-center mb-3"
+                          >
+                            {/* BelongsTo Text */}
+                            <div className="belongs-to p-2 me-3">
+                              <strong>{item.belongsTo}</strong>
+                            </div>
+
+                            {/* Droppable Box */}
+                            <div
+                              className={`droppable-box p-2 border rounded me-3 ${
+                                draggingOver === item.belongsTo
+                                  ? "droppable-box-hover"
+                                  : ""
+                              } ${
+                                responses[`${qIndex}-${item.belongsTo}`]
+                                  ? "filled"
+                                  : ""
+                              }`}
+                              onDragOver={(e) =>
+                                handleDragOver(e, item.belongsTo)
+                              }
+                              onDragLeave={handleDragLeave}
+                              onDrop={() => handleDrop(qIndex, item.belongsTo)}
+                            >
+                              {responses[`${qIndex}-${item.belongsTo}`] ? (
+                                <div
+                                  className="d-flex justify-content-between"
+                                  draggable
+                                  onDragStart={() =>
+                                    handleReturnDrag(qIndex, {
+                                      text: responses[
+                                        `${qIndex}-${item.belongsTo}`
+                                      ],
+                                    })
+                                  }
+                                >
+                                  {responses[`${qIndex}-${item.belongsTo}`]}
+                                </div>
+                              ) : (
+                                "Drop your answer here"
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
-            </div>
+            </>
+          ) : (
+            <>
+              <div className="container my-4">
+                <div className="card shadow p-4">
+                  <div className="text-center">
+                    <div className="p-font text-muted">
+                      <h5>No questions related to matching question answers</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+          {/* Question2 */}
+          <QuestionPaperPart2 />
+          {/* Question3 */}
+          <QuestionPaperPart3 />
+          <div className="mt-5 mb-5">
+            <form onSubmit={handleSubmit}>
+              <div className="text-center">
+                <button type="submit" className="btn btn-success btn-lg">
+                  Submit Answers
+                </button>
+              </div>
+            </form>
           </div>
         </>
       )}
-      {/* Question2 */}
-      <QuestionPaperPart2 />
-      {/* Question3 */}
-      <QuestionPaperPart3 />
-      <div className="mt-5 mb-5">
-        <form onSubmit={handleSubmit}>
-          <div className="text-center">
-            <button type="submit" className="btn btn-success btn-lg">
-              Submit Answers
-            </button>
-          </div>
-        </form>
-      </div>
     </>
   );
 };

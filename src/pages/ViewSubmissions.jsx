@@ -50,7 +50,7 @@ const ViewSubmissions = () => {
   return (
     <div className="container mt-5">
       {isLoading ? (
-        <div className="question-paper-header text-center mb-5 mt-4">
+        <div className="text-center mb-5 mt-4">
           <h3 className="text-muted">Loading ...</h3>
         </div>
       ) : (
@@ -68,37 +68,39 @@ const ViewSubmissions = () => {
           </div>
 
           {submissions.length > 0 ? (
-            <table className="table table-striped table-bordered table-hover shadow-sm">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Answer ID</th>
-                  <th>Username</th>
-                  <th>User ID</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {submissions.map((submission, index) => (
-                  <tr key={submission.answerId}>
-                    <td>{index + 1}</td>
-                    <td>{submission.answerId}</td>
-                    <td>{submission.userName}</td>
-                    <td>{submission.userId}</td>
-                    <td>
-                      <button
-                        className="btn btn-primary btn-sm"
-                        onClick={() =>
-                          handleViewAnswerSheet(submission.answerId)
-                        }
-                      >
-                        View Answer Sheet
-                      </button>
-                    </td>
+            <div className="table-responsive">
+              <table className="table table-striped table-bordered table-hover shadow-sm">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Answer ID</th>
+                    <th>Username</th>
+                    <th>User ID</th>
+                    <th>Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {submissions.map((submission, index) => (
+                    <tr key={submission.answerId}>
+                      <td>{index + 1}</td>
+                      <td>{submission.answerId}</td>
+                      <td>{submission.userName}</td>
+                      <td>{submission.userId}</td>
+                      <td>
+                        <button
+                          className="btn btn-primary btn-sm"
+                          onClick={() =>
+                            handleViewAnswerSheet(submission.answerId)
+                          }
+                        >
+                          View Answer Sheet
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           ) : (
             <div className="alert alert-warning text-center">
               No submissions available for this question.
